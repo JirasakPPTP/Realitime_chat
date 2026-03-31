@@ -61,16 +61,17 @@ const Login = () => {
         <p className="mt-4 text-slate-300 text-sm">
           No account? <a href="/register" className="text-brand-400">Register</a>
         </p>
-      </form>
-      <div>
+        <div className='text-white'>
           รหัสผ่านสำหรับทดสอบ
         </div>
-        <tr>
+        <tr className='text-white'>
           test@gmail.com
         </tr>
-        <tr>
+        <tr className='text-white'>
           1234
         </tr>
+      </form>
+      
     </div>
   );
 };
