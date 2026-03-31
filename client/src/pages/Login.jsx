@@ -62,6 +62,15 @@ const Login = () => {
           No account? <a href="/register" className="text-brand-400">Register</a>
         </p>
       </form>
+      <div>
+          รหัสผ่านสำหรับทดสอบ
+        </div>
+        <tr>
+          test@gmail.com
+        </tr>
+        <tr>
+          1234
+        </tr>
     </div>
   );
 };
