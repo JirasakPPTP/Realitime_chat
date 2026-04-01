@@ -4,7 +4,10 @@ import TypingIndicator from './TypingIndicator';
 
 const ChatBox = ({
   activeTarget,
+  canDeleteRoom,
   messages,
+  onDeleteMessage,
+  onDeleteRoom,
   user,
   onSend,
   onTyping,
@@ -24,19 +27,38 @@ const ChatBox = ({
       <header className="h-16 border-b border-slate-800 px-5 flex items-center justify-between bg-slate-900">
         <div>
           <h2 className="text-white text-lg font-semibold">{activeTarget.label}</h2>
-          <p className="text-xs text-slate-400">{activeTarget.type === 'room' ? 'Public room' : 'Direct message'}</p>
+          <p className="text-xs text-slate-400">
+            {activeTarget.type === 'room' ? 'Public room' : 'Direct message'}
+          </p>
         </div>
+        {activeTarget.type === 'room' && canDeleteRoom && (
+          <button
+            onClick={onDeleteRoom}
+            className="rounded-md border border-red-500/40 px-3 py-1 text-sm text-red-300 hover:bg-red-500/10"
+          >
+            ลบห้อง
+          </button>
+        )}
       </header>
 
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
         {messages.map((msg) => (
-          <MessageBubble key={msg._id} message={msg} mine={msg.senderId?._id === user?._id} />
+          <MessageBubble
+            key={msg._id}
+            message={msg}
+            mine={msg.senderId?._id === user?._id}
+            onDelete={onDeleteMessage}
+          />
         ))}
       </div>
 
       <TypingIndicator usernames={typingUsers} />
 
-      <ChatInput onSend={onSend} onTyping={onTyping} onStopTyping={onStopTyping} />
+      <ChatInput
+        onSend={onSend}
+        onTyping={onTyping}
+        onStopTyping={onStopTyping}
+      />
     </div>
   );
 };

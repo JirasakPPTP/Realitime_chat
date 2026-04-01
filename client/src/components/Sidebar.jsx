@@ -6,6 +6,7 @@ const Sidebar = ({
   users,
   activeTarget,
   onSelectRoom,
+  onDeleteRoom,
   onSelectUser,
   onCreateRoom,
   onLogout,
@@ -59,15 +60,29 @@ const Sidebar = ({
           {rooms.map((room) => {
             const selected = activeTarget?.type === 'room' && activeTarget.id === room._id;
             const count = badges[`room:${room._id}`] || 0;
+            const canDelete = String(room.createdBy) === String(user?._id);
             return (
-              <button
+              <div
                 key={room._id}
-                onClick={() => onSelectRoom(room)}
-                className={`w-full text-left px-3 py-2 rounded-md flex justify-between ${selected ? 'bg-brand-600' : 'hover:bg-slate-800'}`}
+                className={`w-full px-3 py-2 rounded-md flex items-center gap-2 ${selected ? 'bg-brand-600' : 'hover:bg-slate-800'}`}
               >
-                <span className="truncate"># {room.name}</span>
-                {count > 0 && <span className="ml-2 text-xs bg-red-600 px-2 rounded-full">{count}</span>}
-              </button>
+                <button
+                  onClick={() => onSelectRoom(room)}
+                  className="min-w-0 flex-1 text-left"
+                >
+                  <span className="truncate block"># {room.name}</span>
+                </button>
+                {count > 0 && <span className="text-xs bg-red-600 px-2 rounded-full">{count}</span>}
+                {canDelete && (
+                  <button
+                    onClick={() => onDeleteRoom(room)}
+                    className="text-[11px] text-red-200 hover:text-red-100"
+                    aria-label={`Delete room ${room.name}`}
+                  >
+                    ลบ
+                  </button>
+                )}
+              </div>
             );
           })}
         </div>

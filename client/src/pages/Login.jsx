@@ -62,7 +62,7 @@ const Login = () => {
           No account? <a href="/register" className="text-brand-400">Register</a>
         </p>
         <div className='text-white'>
-          รหัสผ่านสำหรับทดสอบ
+          รหัสผ่านสำหรับทดสอบใช้ในการสื่อสารกันได้
         </div>
         <tr className='text-white'>
           test@gmail.com
@@ -70,6 +70,13 @@ const Login = () => {
         <tr className='text-white'>
           1234
         </tr>
+         <tr className='text-white'>
+          test2@gmail.com
+        </tr>
+        <tr className='text-white'>
+          1234
+        </tr>
+        
       </form>
       
     </div>
